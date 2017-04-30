@@ -26,18 +26,18 @@ clearfix issue
 都可以出发BFC<br />
 不支持ie6，且当父盒子小于子盒子的大小时会出现问题。<br />
 
-2.伪类
+2.伪元素
 ```html
-        .clearfix:after {
+ .clearfix:after {
             content: "\0020";
             display: block;
             height: 0;
             clear: both;
-        }
-        .clearfix {
+ }
+  .clearfix {
             zoom: 1;
-        }
-    <div class="clearfix">
+  }   //触发IE的hasLayout属性
+    <div class="clearfix">
         <div class="fl"></div>
         <div class="fl"></div>
     </div>
