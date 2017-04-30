@@ -19,12 +19,12 @@ clearfix issue
         <div class="fl"></div>
     </div>
 ```
-父元素overflow:hidden后，首先会计算height: auto的真实高度，由于其触发了BFC，需要包含子元素，所以高度不是0，而是子元素高度。
-•overflow的值不为visible。
-•display的值为table-cell, table-caption, inline-block中的任何一个。
-•position的值不为relative和static
-都可以出发BFC
-不支持ie6，且当父盒子小于子盒子的大小时会出现问题。
+父元素overflow:hidden后，首先会计算height: auto的真实高度，由于其触发了BFC，需要包含子元素，所以高度不是0，而是子元素高度。<br />
+•overflow的值不为visible。<br />
+•display的值为table-cell, table-caption, inline-block中的任何一个。<br />
+•position的值不为relative和static<br />
+都可以出发BFC<br />
+不支持ie6，且当父盒子小于子盒子的大小时会出现问题。<br />
 
 2.伪类
 ```html
