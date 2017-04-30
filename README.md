@@ -1,24 +1,73 @@
 # layout
-issue
+clearfix issue
 ##
-浮动元素容器的clearing问题
+常见的清除浮动的相关问题
 
-1.添加空元素
+1.父元素加overflow：hidden
 ```html
-   <div>
-        <div style="float:left;width:45%;"></div>
-        <div style="float:right;width:45%;"></div>
-   </div>
+ .father{
+         overflow:hidden
+ }
+ .fl{
+      background: #000;
+      height: 100px;
+      width: 100px;
+      float: left;
+ }
+    <div class="father">
+        <div class="fl"></div>
+        <div class="fl"></div>
+    </div>
 ```
-父容器现在必须考虑非浮动子元素的位置，而后者肯定出现在浮动元素下方，所以显示出来，父容器就把所有子元素都包括进去了。
-违背了语义化的原则
+父元素overflow:hidden后，首先会计算height: auto的真实高度，由于其触发了BFC，需要包含子元素，所以高度不是0，而是子元素高度。
+•overflow的值不为visible。
+•display的值为table-cell, table-caption, inline-block中的任何一个。
+•position的值不为relative和static
+都可以出发BFC
+不支持ie6，且当父盒子小于子盒子的大小时会出现问题。
 
-2.浮动的父容器
+2.伪类
 ```html
-<div style="float:left;">
-    <div style="float:left;width:45%;"></div>
-    <div style="float:right;width:45%;"></div>
-</div>
+        .clearfix:after {
+            content: "\0020";
+            display: block;
+            height: 0;
+            clear: both;
+        }
+        .clearfix {
+            zoom: 1;
+        }
+    <div class="clearfix">
+        <div class="fl"></div>
+        <div class="fl"></div>
+    </div>
 ```
-父容器也改成浮动定位，这样它就可以带着子元素一起浮动
-会影响到后面元素的定位，而且有时候因为需要父元素无法变成浮动
+
+3.clear：both
+```html
+     <div>
+        <div class="fl"></div>
+        <div class="fl"></div>
+        <div style="clear: both"></div>
+    </div>
+ ```
+ 增加无意义的标签，不符合语义化。
+ 
+ 4.父元素一起浮动float
+ ```html
+ .father{
+        float:left
+ }
+ .fl{
+      background: #000;
+      height: 100px;
+      width: 100px;
+      float: left;
+ }
+    <div class="father">
+        <div class="fl"></div>
+        <div class="fl"></div>
+        <div style="clear: both"></div>
+    </div>
+    ```
+    影响后面元素的定位
